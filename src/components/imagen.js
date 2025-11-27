@@ -3,29 +3,31 @@ import {
     changeHandler,
     dblclickHandler,
     dragOverHandler,
-    dropHandler,
-
+    dropHandler
 } from '@/lib/eventos'
+import Image from 'next/image'
 
-function Imagen({ img }) {
+
+
+function Imagen({ src }) {
     return (
         <>
             <img
                 id='imgPreview'
-                src={img}
+                src={src}
+                alt="imagen"
+                width={240}
+                height={240}
                 onDrop={dropHandler}
                 onDragOver={dragOverHandler}
                 onDoubleClick={dblclickHandler}
-                style={{
-                    objectFit: 'cover',
-                    objectPosition: 'center'
-                }}
+                className='object-cover object-center'
             />
             <input type='file'
                 name='file'
                 accept='image/*'
                 onChange={changeHandler}
-                style={{ display: 'none' }}
+                className='hidden'
             />
         </>
     )

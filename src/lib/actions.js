@@ -1,18 +1,8 @@
 'use server'
 import { db } from '@/lib/mysql'
-import { redirect } from 'next/navigation';
 import cloudinary from '@/lib/cloudinary'
-import { unstable_noStore } from 'next/cache';
+import { revalidatePath } from 'next/cache';
 
-/*
-OPERACIONES CRUD
-
-C: CREATE -> newArticulo
-R: READ   -> getArticulos
-U: UPDATE -> editArticulo
-D: DELETE -> deleteArticulo
-
-*/
 
 
 async function imgCreate(file) {
@@ -46,27 +36,21 @@ async function imgCreate(file) {
 }
 
 
-export async function getArticulos() {
-  unstable_noStore()  // para no cachear datos
+/*
+OPERACIONES CRUD
 
-  try {
-    // Retardo artificial para fines demostrativos.
-    // No realizar en la vida real :)
-    console.log('Recuperando artículos...');
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+C: CREATE -> createArticulo
+R: READ   -> getArticulos
+U: UPDATE -> updateArticulo
+D: DELETE -> deleteArticulo
+
+*/
 
 
-    const results = await db.query('select * from articulos');
-    console.log(results);
 
-    return results;
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
-}
 
-export async function newArticulo(formData) {
+
+export async function createArticulo(prevState, formData) {
   const nombre = formData.get('nombre');
   const descripcion = formData.get('descripcion');
   const precio = formData.get('precio');
@@ -85,15 +69,19 @@ export async function newArticulo(formData) {
       query = 'insert into articulos(nombre,descripcion,precio) values (?, ?, ?)';
       results = await db.query(query, [nombre, descripcion, precio]);
     }
-    console.log(results);
+    // console.log(results);
+
+    revalidatePath('/articulos');
+    return { success: 'Operación exitosa' }
   } catch (error) {
     console.log(error);
   }
-  redirect('/articulos');
 }
 
 
-export async function editArticulo(formData) {
+
+
+export async function updateArticulo(prevState, formData) {
   const id = formData.get('id')
   const nombre = formData.get('nombre')
   const descripcion = formData.get('descripcion')
@@ -111,22 +99,29 @@ export async function editArticulo(formData) {
     } else {
       results = await db.query(query, [{ nombre, descripcion, precio }, id]);
     }
-    console.log(results);
+    // console.log(results);
+
+    revalidatePath('/articulos');
+    return { success: 'Operación exitosa' }
   } catch (error) {
     console.log(error);
   }
-  redirect('/articulos');
 }
 
-export async function deleteArticulo(formData) {
+
+
+
+export async function deleteArticulo(prevState, formData) {
   const id = formData.get('id');
 
   try {
     const query = 'delete from articulos where id = ?';
     const results = await db.query(query, [id]);
-    console.log(results);
+    // console.log(results);
+
+    revalidatePath('/articulos');
+    return { success: 'Operación exitosa' }
   } catch (error) {
     console.log(error);
   }
-  redirect('/articulos');
 }
