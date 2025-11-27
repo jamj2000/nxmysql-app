@@ -1,14 +1,7 @@
-import Link from 'next/link'
-import { imgRetrieve } from '@/lib/actions'
+import { redirect } from 'next/navigation'
 
 
 export default async function Home() {
+  redirect('/articulos')
 
-  return (
-    <section>
-      <h1>Página de inicio</h1>
-      <hr />
-      <Link href={"/articulos"}>Listado de artículos</Link>      
-    </section>
-  )
 }

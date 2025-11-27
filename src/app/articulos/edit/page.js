@@ -3,7 +3,8 @@ import { db } from "@/lib/mysql"
 import { editArticulo } from "@/lib/actions"
 
 
-async function page({ searchParams }) {
+async function page(props) {
+  const searchParams = await props.searchParams;
   const [articulo] = await db.query('select * from articulos where id = ?', [searchParams.id]);
 
   return (
