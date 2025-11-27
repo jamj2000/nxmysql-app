@@ -1,13 +1,13 @@
 import Imagen from "@/components/Imagen"
 import Button from "@/components/Button"
 
-function Form({ action, title, articulo, disabled }) {
-    
+function Form({ action, title, articulo, disabled = false }) {
+
     return (
         <form id="preview" >
             <Imagen img={articulo?.imagen ?? '/imagen.png'} />
 
-            <div class="datos">
+            <div className="datos">
                 <input type='hidden' name='id' value={articulo?.id} />
                 <fieldset disabled={disabled}>
                     <label htmlFor='nombre'>Nombre</label>
