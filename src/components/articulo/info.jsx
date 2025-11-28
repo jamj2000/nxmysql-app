@@ -9,7 +9,7 @@ export default function InfoArticulo({ data }) {
     if (!articulo) notFound()
 
     return (
-        <article className="bg-slate-100 border border-slate-200 grid place-items-center md:grid-cols-[30%_1fr] gap-4">
+        <article className=" grid place-items-center md:grid-cols-[30%_1fr] gap-4 bg-slate-100 border border-slate-200">
             <img src={articulo.imagen} />
             <div className="flex flex-col w-full h-full text-xl p-8 rounded">
                 <strong>{articulo.nombre}</strong>
