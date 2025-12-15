@@ -27,8 +27,7 @@ export default function PaginaArticulos() {
 
 
             <Suspense fallback={<Skeleton />}  >
-                <ListaArticulos promesaArticulos={promesaArticulos} />
-                {/* <ListaArticulos data={getArticulos()} />  Pasamos promesa */}
+                <ListaArticulos promesaArticulos={promesaArticulos} /> {/* Pasamos promesa */}
             </Suspense>
         </section>
     )

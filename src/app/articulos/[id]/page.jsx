@@ -1,9 +1,8 @@
 import { getArticulo, getPrueba } from '@/lib/data'
 import { Suspense } from 'react'
-import Articulo, { Prueba } from '@/components/articulos/info'
 import { SquareLoader } from 'react-spinners'
 import BackButton from '@/components/backbutton'
-
+import Articulo, { Prueba } from '@/components/articulos/info'
 
 
 

@@ -1,7 +1,6 @@
 'use client'
 import { notFound } from "next/navigation"
 import { use } from "react"
-import { Suspense } from "react"
 
 
 
