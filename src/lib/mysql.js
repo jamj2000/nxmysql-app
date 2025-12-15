@@ -1,5 +1,7 @@
 import mysql from 'serverless-mysql'
 
+export const db = mysql(process.env.DATABASE_URL)
+
 // export const db = mysql({
 //     config: {
 //         host: process.env.MYSQL_HOST,
@@ -10,4 +12,3 @@ import mysql from 'serverless-mysql'
 //     }
 // })
 
-export const db = mysql(process.env.DATABASE_URL)
